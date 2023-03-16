@@ -451,6 +451,19 @@ const updatePic = (dispatch) => async({id, imageUri, authToken})=>{
     }
 };
 
+const getImage = (dispatch) => async ({imageUri, token}) =>{
+    try{
+        const response = await axios.get(imageUri, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+       
+        });
+        console.log(response);
+    } catch(err){
+        console.log(err.repsonse);
+    }
+}
 
 export const {Provider, Context} = createDataContext(
     authReducer,
@@ -468,7 +481,8 @@ export const {Provider, Context} = createDataContext(
         confirmResetPassword,
         confirmResetPasswordTr,
         updatePic,
-        pickImage
+        pickImage,
+        getImage
     },
     {
         token: null,
