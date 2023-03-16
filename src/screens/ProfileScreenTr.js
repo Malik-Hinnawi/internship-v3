@@ -1,15 +1,34 @@
 import React, {useContext, useEffect} from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Text } from "react-native-elements";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
+import { ScrollView } from "react-native-gesture-handler";
+import NavLink from "../components/NavLink";
 
 const ProfileScreenTr = () =>{
     const {state} = useContext(AuthContext);
 
     return <SafeAreaView forceInset={{top: 'always'}}>
+         <ScrollView>
         <View style= {styles.containerStyle}>
+        <Image source={{
+                uri: state.profilePic,
+                headers: {
+                    Authorization: 'Bearer ' + state.token,
+                    "Content-Type": "multipart/form-data",
+                    "x-access-token": state.token
+                }
+            }}
+            style={{width: 400, height: 400}}
+            onError = {(err)=> console.log(err)} />
+            
+            <NavLink 
+            text = "Change Profile pic"
+            routeName="UploadTr"
+            />
+
             <View style = {styles.miniContainerStyle}>
             <Text h4>Ad: </Text>
             <Text>{state.name}</Text>
@@ -30,6 +49,7 @@ const ProfileScreenTr = () =>{
             <Text>{state.role}</Text>
             </View>
         </View>
+        </ScrollView>
     </SafeAreaView>
 }
 

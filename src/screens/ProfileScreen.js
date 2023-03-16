@@ -9,7 +9,7 @@ import NavLink from "../components/NavLink";
 
 const ProfileScreen = () =>{
     const {state} = useContext(AuthContext);
-    
+    console.log(state.profilePic);
     return <SafeAreaView forceInset={{top: 'always'}}>
         <ScrollView>
         <View style= {styles.containerStyle}>

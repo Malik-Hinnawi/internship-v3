@@ -433,7 +433,7 @@ const confirmResetPasswordTr = (dispatch) => async ({code, password}) => {
 const updatePic = (dispatch) => async({id, imageUri, authToken})=>{
     try{
         let formData = new FormData();
-        formData.append('file', imageUri);
+        formData.append('file', {name: new Date + `_${id}`,type: "image/jpg", uri:imageUri});
         console.log(imageUri);
         const response = await config.post(`/api/user/${id}/profile-picture/add`, formData,
         {
@@ -444,6 +444,7 @@ const updatePic = (dispatch) => async({id, imageUri, authToken})=>{
         }
         )
         console.log(response);
+        navigate('Profile');
     }
     catch(err){
         console.log(err.response);

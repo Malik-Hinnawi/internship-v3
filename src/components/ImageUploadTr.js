@@ -4,7 +4,7 @@ import { Text, Button } from "react-native-elements";
 import { Context as AuthContext } from "../context/AuthContext";
 import Spacer from "./Spacer";
 
-const ImageUpload = () => {
+const ImageUploadTr = () => {
     const [image, setImage] = useState("");
     const {state,pickImage, updatePic} = useContext(AuthContext);
    
@@ -13,12 +13,12 @@ const ImageUpload = () => {
     return <View style = {styles.containerStyle}>
         <View>
             <TouchableOpacity onPress= {()=>pickImage({setImage})} style= {styles.uploadButton}>
-                <Text style = {{textAlign: "center"}}>Upload Image</Text>
+                <Text style = {{textAlign: "center"}}>Foto Ekle</Text>
                 {image? <Image source = {{uri: image}} style = {{width: "100%", height:"100%"}}/>: null}
             </TouchableOpacity>
             <Spacer>
             <Button 
-                title = "Upload pic"
+                title = "Foto ekle"
                 onPress= {()=> updatePic(
                     {
                         id: state.id,
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ImageUpload;
+export default ImageUploadTr;

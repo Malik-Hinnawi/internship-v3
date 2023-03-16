@@ -24,6 +24,7 @@ import LogoutScreenTr from './src/screens/LogoutScreenTr';
 import ConfirmPasswordScreen from './src/screens/ConfirmPasswordScreen';
 import ConfirmPasswordScreenTr from './src/screens/ConfirmPasswordScreenTr';
 import UploadScreen from './src/screens/UploadScreen';
+import UploadScreenTr from './src/screens/UploadScreenTr';
 
 const mainNavigator = createSwitchNavigator({
     englishFlow: createSwitchNavigator({
@@ -51,7 +52,8 @@ const mainNavigator = createSwitchNavigator({
             LogoutTr: LogoutScreenTr
         }),
         ConfirmCodeTr: ConfirmCodeScreenTr,
-        ConfirmPasswordTr: ConfirmPasswordScreenTr
+        ConfirmPasswordTr: ConfirmPasswordScreenTr,
+        UploadTr: UploadScreenTr
     })
 })
 
