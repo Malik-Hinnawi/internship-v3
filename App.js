@@ -4,7 +4,7 @@ import React from 'react';
 // Navigators:
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { setNavigator } from "./src/navigationRef";
 import {Provider as AuthProvider} from "./src/context/AuthContext";
 
