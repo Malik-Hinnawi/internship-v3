@@ -35,8 +35,17 @@ const authReducer = (state, action)=>{
                 company: '',
                 email: '',
                 role: '',
-                profilePic: ''
+                profilePic: '',
+                cities: [],
+                regions: [],
+                towns: []
             };
+        case "insert_city_array":
+            return {...state, cities: action.payload};
+        case "insert_regions_array":
+            return {...state, regions: action.payload};
+        case "insert_towns_array":
+            return {...state, towns: action.payload};
         default:
             return state;
     }
@@ -452,6 +461,188 @@ const updatePic = (dispatch) => async({id, imageUri, authToken})=>{
 };
 
 
+const getCities = (dispatch) => async({authToken, page = 0, pageSize = 5}) => {
+    try{
+        const response = await config.get('/api/city', {
+            params:{
+                page: page,
+                pageSize: pageSize
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        dispatch({
+            type: 'insert_city_array',
+            payload: response.data.data.content
+        })
+    }
+    catch(err){
+
+    }
+};
+
+const deleteCity = (dispatch) => async({authToken, cityId})=> {
+    try{
+        const response = await config.delete('/api/city', {
+            params:{
+                id: cityId
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+    }
+    catch(err){
+        console.log(err.response.data.message);
+    }
+};
+
+const deleteRegion = (dispatch) => async({authToken, regionId})=> {
+    try{
+        const response = await config.delete('/api/region', {
+            params:{
+                id: regionId
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+    }
+    catch(err){
+        console.log(err.response.data.message);
+    }
+};
+
+const deleteTown = (dispatch) => async({authToken, townId})=> {
+    try{
+        const response = await config.delete('/api/town', {
+            params:{
+                id: townId
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+    }
+    catch(err){
+        console.log(err.response.data.message);
+    }
+};
+
+
+const getRegions = (dispatch) => async({authToken, cityId, page = 0, pageSize = 5}) => {
+    try{
+        const response = await config.get('/api/region', {
+            params: {
+                page: page,
+                pageSize: pageSize
+            },
+            data:{
+                "filter": {
+                    cityId: cityId
+                }
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        dispatch({
+            type: 'insert_regions_array',
+            payload: response.data.data.content
+        });
+    }
+    catch(err){
+        console.log(err.response);
+    }
+};
+
+const getTowns = (dispatch) => async({authToken, cityId, regionId, page = 0, pageSize = 5}) => {
+    try{
+        const response = await config.get('/api/town', {
+            params: {
+                page: page,
+                pageSize: pageSize
+            },
+            data:{
+                "filter": {
+                    cityId: cityId,
+                    regionId: regionId
+                }
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        dispatch({
+            type: 'insert_towns_array',
+            payload: response.data.data.content
+        });
+    }
+    catch(err){
+        console.log(err.response);
+    }
+};
+
+
+const addCity = (dispatch) => async({authToken, name}) =>{
+    try{
+        const response = await config.post('/api/city',null, {
+            params:{
+                name: name
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+        navigate("AdminstratorCRUD");
+    } catch(err){
+        console.log(err.response);
+    }
+}
+
+
+
+const addRegion = (dispatch) => async({authToken, name, cityId}) =>{
+    try{
+        const response = await config.post('/api/region',null, {
+            params:{
+                name: name,
+                cityId: cityId
+            },
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+        navigate("AdminstratorRegions");
+    } catch(err){
+        console.log(err.response);
+    }
+}
+
+const addTown = (dispatch) => async({authToken, name, regionId}) =>{
+    try{
+        const response = await config.post('/api/town',{
+            name: name,
+            regionId: regionId
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + authToken
+            }
+        });
+        console.log(response.data);
+        navigate("AdminstratorTowns");
+    } catch(err){
+        console.log(err.response);
+    }
+}
+
+
 export const {Provider, Context} = createDataContext(
     authReducer,
     {
@@ -468,7 +659,16 @@ export const {Provider, Context} = createDataContext(
         confirmResetPassword,
         confirmResetPasswordTr,
         updatePic,
-        pickImage
+        pickImage,
+        getCities,
+        deleteCity,
+        getRegions,
+        getTowns,
+        addCity,
+        addRegion,
+        addTown,
+        deleteRegion,
+        deleteTown
     },
     {
         token: null,
@@ -480,6 +680,9 @@ export const {Provider, Context} = createDataContext(
         company: '',
         email: '',
         role: '',
-        profilePic: ''
+        profilePic: '',
+        cities: [],
+        regions:[],
+        towns: []
     }
 );

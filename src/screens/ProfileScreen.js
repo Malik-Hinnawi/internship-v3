@@ -1,15 +1,14 @@
 import React, {useContext} from "react";
 import { View, StyleSheet,Image, TouchableOpacity } from "react-native";
-import { Text } from "react-native-elements";
+import { Text, Button } from "react-native-elements";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
 import { ScrollView } from "react-native-gesture-handler";
 import NavLink from "../components/NavLink";
 
-const ProfileScreen = () =>{
+const ProfileScreen = ({navigation}) =>{
     const {state} = useContext(AuthContext);
-    console.log(state.profilePic);
     return <SafeAreaView forceInset={{top: 'always'}}>
         <ScrollView>
         <View style= {styles.containerStyle}>
@@ -23,7 +22,7 @@ const ProfileScreen = () =>{
                 }
             }}
             style={{width: 400, height: 400}}
-            onError = {(err)=> console.log(err)} />
+             />
             
             <NavLink 
             text = "Change Profile pic"
@@ -51,6 +50,7 @@ const ProfileScreen = () =>{
             <Text>{state.role}</Text>
             </View>
         </View>
+        {state.role == "ADMIN"? <Button title = "Go to adminstrator screen" onPress= {()=>navigation.navigate("AdminstratorCRUD")}/>:null}
      </ScrollView>
     </SafeAreaView>
 }

@@ -25,6 +25,19 @@ import ConfirmPasswordScreen from './src/screens/ConfirmPasswordScreen';
 import ConfirmPasswordScreenTr from './src/screens/ConfirmPasswordScreenTr';
 import UploadScreen from './src/screens/UploadScreen';
 import UploadScreenTr from './src/screens/UploadScreenTr';
+import AdminstratorCRUDScreen from './src/screens/AdminstratorCRUDScreen';
+import AdminstratorCRUDScreenTr from './src/screens/AdminstratorCRUDScreenTr';
+import AdminstratorRegionsPage from './src/screens/AdminstratorRegionsPage';
+import AdminstratorRegionsPageTr from './src/screens/AdminstratorRegionsPageTr';
+import AdminstratorAddScreen from './src/screens/AdminstratorAddScreen';
+import AdminstratorAddScreenTr from './src/screens/AdminstratorAddScreenTr';
+import AdminstratorAddRegionsScreen from './src/screens/AdminstratorAddRegionsScreen';
+import AdminstratorAddRegionsScreenTr from './src/screens/AdminstratorAddRegionsScreenTr';
+import AdminstratorAddTownsScreen from './src/screens/AdminstratorAddTownsScreen';
+import AdminstratorAddTownsScreenTr from './src/screens/AdminstratorAddTownsScreenTr';
+import AdminstratorTownsPage from './src/screens/AdminstratorTownsPage';
+import AdminstratorTownsPageTr from './src/screens/AdminstratorTownsPageTr';
+
 
 const mainNavigator = createSwitchNavigator({
     englishFlow: createSwitchNavigator({
@@ -39,7 +52,15 @@ const mainNavigator = createSwitchNavigator({
         }),
         ConfirmCode: ConfirmCodeScreen,
         ConfirmPassword: ConfirmPasswordScreen,
-        Upload: UploadScreen
+        Upload: UploadScreen,
+        adminstratorFlow: createStackNavigator({
+            AdminstratorCRUD: AdminstratorCRUDScreen,
+            AdminstratorRegions: AdminstratorRegionsPage,
+            AdminstratorAdd: AdminstratorAddScreen,
+            AdminstratorAddRegions: AdminstratorAddRegionsScreen,
+            AdminstratorTowns: AdminstratorTownsPage,
+            AdminstratorAddTowns: AdminstratorAddTownsScreen
+        })
     }),
     turkishFlow:createSwitchNavigator({
         phaseOneFlowTr: createStackNavigator({
@@ -53,7 +74,15 @@ const mainNavigator = createSwitchNavigator({
         }),
         ConfirmCodeTr: ConfirmCodeScreenTr,
         ConfirmPasswordTr: ConfirmPasswordScreenTr,
-        UploadTr: UploadScreenTr
+        UploadTr: UploadScreenTr,
+        adminstratorFlowTr: createStackNavigator({
+            AdminstratorCRUDTr: AdminstratorCRUDScreenTr,
+            AdminstratorRegionsTr: AdminstratorRegionsPageTr,
+            AdminstratorAddTr: AdminstratorAddScreenTr,
+            AdminstratorAddRegionsTr: AdminstratorAddRegionsScreenTr,
+            AdminstratorTownsTr: AdminstratorTownsPageTr,
+            AdminstratorAddTownsTr: AdminstratorAddTownsScreenTr
+        })
     })
 })
 

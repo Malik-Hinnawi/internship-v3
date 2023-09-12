@@ -28,7 +28,7 @@ const ForgetPasswordScreenTr = () =>{
 
 ForgetPasswordScreenTr.navigationOptions = () => {
     return {
-      title: "Şifre Unutması Sayfası",
+      title: "Şifremi Unuttum Sayfası",
     };
 };
 

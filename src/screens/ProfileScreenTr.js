@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from "react";
 import { View, StyleSheet, Image } from "react-native";
-import { Text } from "react-native-elements";
+import { Text, Button } from "react-native-elements";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
 import { ScrollView } from "react-native-gesture-handler";
 import NavLink from "../components/NavLink";
 
-const ProfileScreenTr = () =>{
+const ProfileScreenTr = ({navigation}) =>{
     const {state} = useContext(AuthContext);
 
     return <SafeAreaView forceInset={{top: 'always'}}>
@@ -22,7 +22,7 @@ const ProfileScreenTr = () =>{
                 }
             }}
             style={{width: 400, height: 400}}
-            onError = {(err)=> console.log(err)} />
+            />
             
             <NavLink 
             text = "Change Profile pic"
@@ -49,6 +49,7 @@ const ProfileScreenTr = () =>{
             <Text>{state.role}</Text>
             </View>
         </View>
+        {state.role == "ADMIN"? <Button title = "Admin sayfası git" onPress= {()=>navigation.navigate("AdminstratorCRUDTr")}/>:null}
         </ScrollView>
     </SafeAreaView>
 }
