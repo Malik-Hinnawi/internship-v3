@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { View, StyleSheet,Image, TouchableOpacity } from "react-native";
 import { Text, Button } from "react-native-elements";
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -7,8 +7,13 @@ import { Context as AuthContext } from "../context/AuthContext";
 import { ScrollView } from "react-native-gesture-handler";
 import NavLink from "../components/NavLink";
 
-const ProfileScreen = ({navigation}) =>{
-    const {state} = useContext(AuthContext);
+
+
+const ProfileScreen = () =>{
+    const {state, getImage} = useContext(AuthContext);
+    // useEffect(()=>{
+    //     getImage({imageUri: state.profilePic, token: state.token});
+    // },[]);
     return <SafeAreaView forceInset={{top: 'always'}}>
         <ScrollView>
         <View style= {styles.containerStyle}>
@@ -16,9 +21,7 @@ const ProfileScreen = ({navigation}) =>{
             <Image source={{
                 uri: state.profilePic,
                 headers: {
-                    Authorization: 'Bearer ' + state.token,
-                    "Content-Type": "multipart/form-data",
-                    "x-access-token": state.token
+                    Authorization: 'Bearer ' + state.token
                 }
             }}
             style={{width: 400, height: 400}}
